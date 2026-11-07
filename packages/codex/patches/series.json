@@ -251,7 +251,11 @@
     {
       "path": "0056-completion-callback.patch",
       "sha256": "ce5c3381285bf830cf3203b7bc031d3b5e6fd33331f2bf69428b8aabe4b8a619"
+    },
+    {
+      "path": "0057-provider-hosted-tools.patch",
+      "sha256": "6d248c094770df64ffd2c7268ed2a8dfacc50c171c25852466ca79bc6c7df710"
     }
   ],
-  "result_tree": "8e02342a0ac03ac7c22ce7556988a857cb912f72"
+  "result_tree": "3d79d95618992ad8bdb7c6b2d012332bdd144ca7"
 }
