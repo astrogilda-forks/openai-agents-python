@@ -24,6 +24,7 @@ if TYPE_CHECKING:
         SQLiteSessionStore as SQLiteSessionStore,
     )
     from .compaction import CompactionContext as CompactionContext
+    from .completion import CompletionContext as CompletionContext, ContinueTurn as ContinueTurn
     from .executor import (
         Environment as Environment,
         EnvironmentSource as EnvironmentSource,
@@ -139,6 +140,8 @@ if TYPE_CHECKING:
 
 _MODULES = {
     "CompactionContext": ".compaction",
+    "CompletionContext": ".completion",
+    "ContinueTurn": ".completion",
     "ModelContextSnapshot": ".model_context",
     "ModelRequestContext": ".model_context",
     "RunBudget": ".usage",
