@@ -647,7 +647,7 @@ except ToolTimeoutError as e:
 
 When you create a function tool via `@function_tool`, you can pass a `failure_error_function`. This is a function that provides an error response to the LLM in case the tool call crashes.
 
--   By default (i.e. if you don't pass anything), it runs a `default_tool_error_function` which tells the LLM an error occurred.
+-   By default (i.e. if you don't pass anything), it runs a `default_tool_error_function` which tells the LLM an error occurred and that the call may or may not have taken effect, so it should check the current state before calling the tool again. A tool can raise after its side effect has happened, for example when a write succeeds but its response is lost.
 -   If you pass your own error function, it runs that instead, and sends the response to the LLM.
 -   If you explicitly pass `None`, then any tool call errors will be re-raised for you to handle. This could be a `ModelBehaviorError` if the model produced invalid JSON, or a `UserError` if your code crashed, etc.
 

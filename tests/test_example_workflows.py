@@ -1275,10 +1275,14 @@ async def test_agents_as_tools_subagent_cancellation_preserves_parent_final_outp
     assert tool_outputs[1]["call_id"] == "outer_observability"
     assert tool_outputs[1]["type"] == "function_call_output"
     assert tool_outputs[1]["output"].startswith(
-        "An error occurred while running the tool. Please try again."
+        "An error occurred while running the tool. "
+        "It may or may not have taken effect; "
+        "check the current state before calling it again."
     )
     assert tool_outputs[1]["output"] == (
-        "An error occurred while running the tool. Please try again."
+        "An error occurred while running the tool. "
+        "It may or may not have taken effect; "
+        "check the current state before calling it again."
     )
 
 
@@ -1377,7 +1381,11 @@ async def test_agents_as_tools_streaming_subagent_cancellation_preserves_parent_
         },
         {
             "call_id": "inner_cancel",
-            "output": ("An error occurred while running the tool. Please try again."),
+            "output": (
+                "An error occurred while running the tool. "
+                "It may or may not have taken effect; "
+                "check the current state before calling it again."
+            ),
             "type": "function_call_output",
         },
     ]

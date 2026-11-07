@@ -1997,9 +1997,15 @@ def _log_function_tool_invocation(*, tool_name: str, input_json: str) -> None:
 def default_tool_error_function(ctx: RunContextWrapper[Any], error: Exception) -> str:
     """Return a fixed error response without exposing the exception to the model.
 
+    The response does not ask the model to retry, because a tool can raise after its side
+    effect has already happened, for example when a write succeeds but its response is lost.
     Provide a custom ``failure_error_function`` to return application-approved error details.
     """
-    return "An error occurred while running the tool. Please try again."
+    return (
+        "An error occurred while running the tool. "
+        "It may or may not have taken effect; "
+        "check the current state before calling it again."
+    )
 
 
 _FUNCTION_TOOL_TIMEOUT_BEHAVIORS: tuple[ToolTimeoutBehavior, ...] = (

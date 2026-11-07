@@ -2030,7 +2030,11 @@ async def test_parallel_tool_call_with_cancelled_sibling_reaches_final_output() 
         {"call_id": "call_ok", "output": "ok", "type": "function_call_output"},
         {
             "call_id": "call_cancel",
-            "output": ("An error occurred while running the tool. Please try again."),
+            "output": (
+                "An error occurred while running the tool. "
+                "It may or may not have taken effect; "
+                "check the current state before calling it again."
+            ),
             "type": "function_call_output",
         },
     ]
@@ -2067,7 +2071,11 @@ async def test_single_tool_call_with_cancelled_tool_reaches_final_output() -> No
     assert tool_outputs == [
         {
             "call_id": "call_cancel",
-            "output": ("An error occurred while running the tool. Please try again."),
+            "output": (
+                "An error occurred while running the tool. "
+                "It may or may not have taken effect; "
+                "check the current state before calling it again."
+            ),
             "type": "function_call_output",
         },
     ]
