@@ -1483,7 +1483,11 @@ async def test_agent_as_tool_rejects_invalid_builder_output() -> None:
     )
     result = await tool.on_invoke_tool(tool_context, '{"input": "hi"}')
 
-    assert result == "An error occurred while running the tool."
+    assert result == (
+        "An error occurred while running the tool. "
+        "It may or may not have taken effect; "
+        "check the current state before calling it again."
+    )
 
 
 @pytest.mark.asyncio
@@ -3856,7 +3860,11 @@ async def test_agent_as_tool_stream_backlog_overflow_stops_nested_run(
             assert len(errors) == 1
             assert isinstance(errors[0], UserError)
         else:
-            assert output == "An error occurred while running the tool."
+            assert output == (
+                "An error occurred while running the tool. "
+                "It may or may not have taken effect; "
+                "check the current state before calling it again."
+            )
         assert "synthetic delta" not in output
 
     assert handler_cancelled.is_set()

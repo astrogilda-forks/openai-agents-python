@@ -163,7 +163,11 @@ async def test_tool_call_error(monkeypatch: pytest.MonkeyPatch):
 
     tool_outputs = [item for item in result.new_items if item.type == "tool_call_output_item"]
     assert tool_outputs, "Expected a tool output item for invalid JSON"
-    assert tool_outputs[0].output == ("An error occurred while running the tool.")
+    assert tool_outputs[0].output == (
+        "An error occurred while running the tool. "
+        "It may or may not have taken effect; "
+        "check the current state before calling it again."
+    )
 
     assert fetch_normalized_spans() == snapshot(
         [
@@ -194,7 +198,11 @@ async def test_tool_call_error(monkeypatch: pytest.MonkeyPatch):
                                 "data": {
                                     "name": "foo",
                                     "input": "bad_json",
-                                    "output": ("An error occurred while running the tool."),
+                                    "output": (
+                                        "An error occurred while running the tool. "
+                                        "It may or may not have taken effect; "
+                                        "check the current state before calling it again."
+                                    ),
                                 },
                             },
                             {"type": "generation"},

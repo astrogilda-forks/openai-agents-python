@@ -116,7 +116,13 @@ async def test_exec_backend_failures_are_not_converted_to_argument_feedback(
     if failure_kind == "cancel":
         result = await Runner.run(agent, "go")
         outputs = [item.output for item in result.new_items if item.type == "tool_call_output_item"]
-        assert outputs == ["An error occurred while running the tool."]
+        assert outputs == [
+            (
+                "An error occurred while running the tool. "
+                "It may or may not have taken effect; "
+                "check the current state before calling it again."
+            )
+        ]
         assert result.final_output == "done"
     else:
         with pytest.raises(UserError) as raised:
